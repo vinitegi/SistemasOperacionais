@@ -1,0 +1,63 @@
+1. Qual é a diferença entre HIT e PAGE FAULT?
+    HIT: a página solicitada já está na memória.
+    PAGE FAULT: a página solicitada não está na memória e precisa ser carregada.
+
+2. Qual é a principal diferença entre FIFO e LRU?
+    FIFO remove a página que entrou primeiro.
+    LRU remove a página que ficou mais tempo sem ser utilizada.
+
+3. Um PAGE FAULT significa necessariamente erro no programa?
+    Não. É um comportamento normal do gerenciamento de memória quando a página necessária não está carregada na RAM.
+
+4. Aumentar a quantidade de frames sempre reduz os page faults no FIFO?
+    Não. A Anomalia de Belady mostra que, em determinadas sequências, aumentar os frames pode até aumentar os page faults.
+
+5. Em quais situações FIFO e LRU podem produzir resultados diferentes?
+    Quando existem páginas reutilizadas com frequência. O LRU leva em conta os acessos recentes, enquanto o FIFO considera apenas a ordem de entrada.
+
+6. Por que o algoritmo Ótimo normalmente apresenta bom resultado?
+    Porque ele escolhe remover a página que será utilizada mais tarde no futuro, minimizando os page faults.
+
+7. Por que um sistema operacional real não consegue utilizar perfeitamente o algoritmo Ótimo?
+    Porque ele exigiria conhecimento exato dos acessos futuros às páginas, algo impossível de prever perfeitamente.
+
+8. Execute pelo menos três sequências diferentes e registre o resultado
+    Digite as páginas separadas por espaço: 1 2 3 4 5 6
+    Digite a quantidade de frames: 3
+
+        Sequência: [1, 2, 3, 4, 5, 6]
+        Frames: 3
+
+        ===== FIFO =====
+        Página 1  -> [1]             PAGE FAULT
+        Página 2  -> [1, 2]          PAGE FAULT
+        Página 3  -> [1, 2, 3]       PAGE FAULT
+        Página 4  -> [2, 3, 4]       PAGE FAULT
+        Página 5  -> [3, 4, 5]       PAGE FAULT
+        Página 6  -> [4, 5, 6]       PAGE FAULT
+
+        Resultado FIFO
+        Page Faults: 6
+        Hits: 0
+        Taxa de Faults: 100.00%
+        Taxa de Hits: 0.00%
+
+        ===== LRU =====
+        Página 1  -> [1]             PAGE FAULT
+        Página 2  -> [1, 2]          PAGE FAULT
+        Página 3  -> [1, 2, 3]       PAGE FAULT
+        Página 4  -> [2, 3, 4]       PAGE FAULT
+        Página 5  -> [3, 4, 5]       PAGE FAULT
+        Página 6  -> [4, 5, 6]       PAGE FAULT
+
+        Resultado LRU
+        Page Faults: 6
+        Hits: 0
+        Taxa de Faults: 100.00%
+        Taxa de Hits: 0.00%
+
+        ===== COMPARAÇÃO FINAL =====
+        FIFO e LRU tiveram a mesma quantidade de Page Faults.
+
+        FIFO -> Faults: 6 | Hits: 0
+        LRU  -> Faults: 6 | Hits: 0
